@@ -73,6 +73,20 @@ export const TOOL_DEFS = [
       },
       required: ['origin', 'destination']
     }
+  },
+  {
+    name: 'convert_currency',
+    description:
+      'Convert an amount between two currencies using official central-bank reference rates. Use when the traveller asks what something costs in their home currency, for budgeting, or to compare prices across countries. Always report the rate_date and note that these are reference rates, not retail exchange-counter rates.',
+    parameters: {
+      type: 'object',
+      properties: {
+        from: { type: 'string', description: "Source currency 3-letter ISO code, e.g. 'JPY'" },
+        to: { type: 'string', description: "Target currency 3-letter ISO code, e.g. 'PHP'" },
+        amount: { type: 'number', description: 'Amount in the source currency. Defaults to 1 if omitted.' }
+      },
+      required: ['from', 'to']
+    }
   }
 ];
 
@@ -170,6 +184,54 @@ function toContract(args, r) {
   };
 }
 
+// ── convert_currency: keyless Frankfurter API (ECB / central-bank reference rates).
+// Workers-safe: single fetch, 8s timeout, never fabricates a rate. Not wired into
+// the deterministic transit prefetch path, so it cannot amplify subrequests.
+const FX_UA = "VoyageFlow/0.1 (+https://github.com/james75x2-design/VoyageFlow)";
+const FX_URL = "https://api.frankfurter.dev/v1/latest";
+
+async function convertCurrency(args) {
+  const from = String((args && args.from) || "").trim().toUpperCase();
+  const to = String((args && args.to) || "").trim().toUpperCase();
+  const amount = (args && args.amount) == null ? 1 : Number(args.amount);
+  if (!/^[A-Z]{3}$/.test(from) || !/^[A-Z]{3}$/.test(to)) {
+    return { error: "from and to must be 3-letter currency codes, e.g. JPY, PHP.", source: "none" };
+  }
+  if (!Number.isFinite(amount) || amount <= 0) {
+    return { error: "amount must be a positive number.", source: "none" };
+  }
+  if (from === to) {
+    return { from, to, amount, converted: amount, rate: 1, rate_date: null, source: "identity" };
+  }
+  const url = `${FX_URL}?base=${from}&symbols=${to}&amount=${amount}`;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const r = await fetch(url, { headers: { "User-Agent": FX_UA }, signal: controller.signal });
+    if (!r.ok) return { error: `Currency API HTTP ${r.status}`, source: "none" };
+    const j = await r.json();
+    const converted = j && j.rates ? j.rates[to] : null;
+    if (converted == null) return { error: `No rate available for ${from}->${to}.`, source: "none" };
+    return {
+      from,
+      to,
+      amount,
+      converted: Number(converted),
+      rate: Number((converted / amount).toFixed(6)),
+      rate_date: j.date || null,
+      source: "frankfurter/ecb",
+      note: "Central-bank reference rate (end-of-day), not a retail exchange-counter rate."
+    };
+  } catch (e) {
+    return {
+      error: e.name === "AbortError" ? "Currency lookup timed out." : String(e.message || e),
+      source: "none"
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function executeTool(name, args, ctx = {}) {
   if (name === 'get_transit_info') {
     const apikey = ctx && ctx.env && ctx.env.TRANSITLAND_API_KEY;
@@ -220,6 +282,8 @@ export async function executeTool(name, args, ctx = {}) {
       note: 'No transit data from Transitland and no fallback entry. Sequence without transit evidence.'
     };
   }
+
+  if (name === 'convert_currency') return convertCurrency(args);
 
   throw new Error(`Unknown tool: ${name}`);
 }
