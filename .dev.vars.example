@@ -1,0 +1,17 @@
+# Local development secrets for `wrangler dev`.
+# Copy to .dev.vars and fill in real values. .dev.vars is gitignored.
+#
+#   cp .dev.vars.example .dev.vars
+#
+# NOTE: wrangler dev reads .dev.vars only at startup — restart after editing.
+# NOTE: use >> (append), not > (overwrite), when adding a key from the shell,
+#       or you will silently wipe the other keys.
+
+# Primary provider.
+GEMINI_API_KEY=your-gemini-key-here
+
+# Fallback provider (openai/gpt-oss-120b, then openai/gpt-oss-20b).
+GROQ_API_KEY=your-groq-key-here
+
+# Tip: set GEMINI_API_KEY=invalid-force-fallback to deliberately exercise the
+# Groq fallback chain. This is an intentional testing placeholder, not a stale key.
