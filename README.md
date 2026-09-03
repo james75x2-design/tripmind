@@ -158,6 +158,49 @@ Structured logs tag `retrieval_signal` (`hybrid` / `keyword_only`) and `ranking_
 
 ---
 
+## 🔌 MCP Tools
+
+VoyageFlow runs a provider-agnostic **MCP-style tool loop**: the model requests a tool, the Worker executes it, feeds the result back, and the model composes a grounded answer. Tools are defined in `src/mcp/tools.mjs`.
+
+| Tool | Backing service | Auth | Returns |
+|---|---|---|---|
+| `get_transit_info` | MOTIS/Transitous geocoding + Transitland | Key for Transitland | Distance, transit time, mode, service frequency |
+| `convert_currency` | Frankfurter (ECB reference rates) | Keyless | Converted amount, rate, rate date |
+
+Both tools use a descriptive `User-Agent`, an 8-second timeout, and graceful error handling, and **never fabricate values** — a failed lookup returns `source: "none"` rather than a guess.
+
+### Currency conversion
+
+`convert_currency` answers budgeting questions ("how much is ¥15,000 in pesos?") using European Central Bank reference rates via the keyless Frankfurter API. It validates ISO currency codes, short-circuits same-currency requests without a network call, and always reports the **rate date** — Frankfurter publishes end-of-day rates, so weekend and holiday requests roll back to the last business day.
+
+The response is deliberately honest about what the number is:
+
+> 15,000 JPY is approximately 5,814 PHP. This is based on the central-bank reference rate from August 25, 2026, so do keep in mind that retail exchange rates might vary slightly.
+
+Notably, VoyageFlow has **no intent-gating function** — no forced tool selection. The model picks `convert_currency` purely from its description, which proved sufficient in testing without any system-prompt nudging.
+
+### Deterministic transit prefetch
+
+Itinerary generation does **not** use the tool loop, and that's deliberate. An earlier version called `get_transit_info` from inside the loop, which meant every provider fallback (Gemini → Groq-120b → Groq-20b) re-ran the whole loop. With four destinations that reached ~12 transit fetches and ~48 subrequests — right at Cloudflare's 50-subrequest ceiling, causing intermittent failures.
+
+The fix replaced narration-driven tool calls with a deterministic prefetch:
+
+```
+Itinerary request
+  ↓
+1. Planner pass — extract { base, destinations } as strict JSON
+  ↓
+2. Fetch transit data ONCE per destination
+  ↓
+3. Inject a TRANSIT FACTS block into the system prompt
+  ↓
+4. Generate the itinerary with plain generation (no tool loop)
+```
+
+This cut fetches from ~12 to 4 and subrequests from ~48 to 16, eliminated the failures, and **improved** output quality — because the facts arrive in the prompt rather than mid-conversation, the model sequences day-trips by distance, flags sparse service, and recommends walkable pairings. Non-itinerary turns and failed planner extraction fall back safely to the legacy tool-loop path.
+
+`convert_currency` is intentionally excluded from the prefetch path so it cannot reintroduce subrequest amplification.
+
 ## 🧭 Intent Classifier (Week 5)
 
 Auto-detects whether a query is "plan a trip" (chat/booking) or "ask a factual question" (RAG), so users don't have to manually toggle modes.
@@ -478,7 +521,7 @@ Set `BOOKING_AID`, `GYG_PARTNER_ID`, `VISITORS_COVERAGE_ID` in `createBookingDem
 - [ ] Streaming responses for faster perceived latency on cache misses
 - [ ] Hermetic eval mode for CI (mock Worker responses)
 - [ ] Multi-city trip planning
-- [ ] Currency conversion in the booking desk
+- [x] Currency conversion in the booking desk
 - [x] KB expansion (travel-insurance chunk)
 - [ ] MCP integration for enterprise workflow connectivity
 
