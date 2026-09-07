@@ -239,15 +239,31 @@ Production hardening built on a shared KV-counter foundation.
 
 ## 📊 Evaluation
 
-**100% pass rate** on the local eval harness (15 test cases including semantic queries, prompt injection, and out-of-scope refusal):
+**93% pass rate** on the local eval harness (15 test cases including semantic queries, prompt injection, and out-of-scope refusal). Answer quality holds at **100%** — every case produces a correctly grounded, correctly refused, or correctly cited response:
 
-| Metric | Week 2 baseline | Week 3 (hybrid) | Week 4 (reranker) |
-|---|---|---|---|
-| Total tests | 15 | 15 | 15 |
-| Passed | 12 | 13 | **15** |
-| Retrieval passed | 13 | 13 | **15** |
-| Answer passed | 14 | 15 | **15** |
-| Overall pass rate | 80% | 87% | **100%** (+20pp) |
+| Metric | Week 2 baseline | Week 3 (hybrid) | Week 4 (reranker) | Current (expanded KB) |
+|---|---|---|---|---|
+| Total tests | 15 | 15 | 15 | 15 |
+| Passed | 12 | 13 | **15** | 14 |
+| Retrieval passed | 13 | 13 | **15** | 14 |
+| Answer passed | 14 | 15 | **15** | **15** |
+| Overall pass rate | 80% | 87% | **100%** | 93% |
+
+The Week 4 run scored 100% against a smaller knowledge base. Adding the travel-insurance documents introduced new competition in the candidate pool, and `vf-eval-001` now retrieves `voyageflow-overview::004` outside the top 5 — though the answer still cites it correctly, so answer quality is unaffected. This is the expected trade-off of KB growth rather than a retrieval defect, and it is left visible here rather than tuned away.
+
+### Hermetic mode — record once, replay free
+
+The harness normally calls the live Worker for every case, which costs provider tokens and fails outright when quotas are exhausted. Hermetic mode removes that dependency:
+
+```bash
+EVAL_RECORD=1 node evals/eval.mjs      # run live, write evals/fixtures/<id>.json
+EVAL_HERMETIC=1 node evals/eval.mjs    # replay fixtures — no network, no tokens
+node evals/eval.mjs                    # unchanged live behaviour
+```
+
+Retrieval was already offline — `retrieve()` scores pre-embedded chunks locally with no network call — so only the generation step needed intercepting. Fixtures key off the stable test-case ids in `eval-data.json`, and a missing fixture fails loudly with the command needed to record it.
+
+Crucially, **replay still exercises the full grading pipeline**. Retrieval scoring, citation validation, and failure categorisation all run against replayed answers, so hermetic runs catch grading regressions rather than skipping them. A recorded and a hermetic run produce byte-identical reports.
 
 ### Week 4 telemetry (all 15 tests)
 
@@ -519,7 +535,7 @@ Set `BOOKING_AID`, `GYG_PARTNER_ID`, `VISITORS_COVERAGE_ID` in `createBookingDem
 **Upcoming**
 - [ ] Real-time flight prices via Kiwi.com Tequila / Duffel API
 - [ ] Streaming responses for faster perceived latency on cache misses
-- [ ] Hermetic eval mode for CI (mock Worker responses)
+- [x] **Hermetic eval mode** — `EVAL_RECORD=1` captures fixtures, `EVAL_HERMETIC=1` replays them with no network or provider tokens
 - [ ] Multi-city trip planning
 - [x] Currency conversion in the booking desk
 - [x] KB expansion (travel-insurance chunk)
