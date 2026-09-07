@@ -1,0 +1,114 @@
+{
+  "query": "What does VoyageFlow say about verifying travel information before booking?",
+  "answer_markdown": "VoyageFlow strongly encourages users to verify several details before finalizing any booking [booking-policies::003]. This includes the current price on the partner platform, as VoyageFlow does not display live prices [booking-policies::003]. Users should also verify the cancellation policy and refund window, room type, bed configuration, and included amenities [booking-policies::003]. The total cost, including taxes, fees, and resort charges, should be confirmed [booking-policies::003]. Additionally, VoyageFlow recommends verifying passport validity and visa requirements for the destination [booking-policies::003]. VoyageFlow always recommends users verify travel information before booking, such as current pricing and availability on the partner platform, visa and entry requirements for the destination country, local health advisories and travel warnings, and cancellation and refund policies specific to the booking [voyageflow-overview::004]. Users are responsible for confirming all details before payment [voyageflow-overview::004].",
+  "citations": [
+    {
+      "claim": "VoyageFlow strongly encourages users to verify several details before finalizing any booking.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "This includes the current price on the partner platform, as VoyageFlow does not display live prices.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "Users should also verify the cancellation policy and refund window, room type, bed configuration, and included amenities.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "The total cost, including taxes, fees, and resort charges, should be confirmed.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "Additionally, VoyageFlow recommends verifying passport validity and visa requirements for the destination.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "VoyageFlow always recommends users verify travel information before booking, such as current pricing and availability on the partner platform, visa and entry requirements for the destination country, local health advisories and travel warnings, and cancellation and refund policies specific to the booking.",
+      "chunk_ids": [
+        "voyageflow-overview::004"
+      ]
+    },
+    {
+      "claim": "Users are responsible for confirming all details before payment.",
+      "chunk_ids": [
+        "voyageflow-overview::004"
+      ]
+    }
+  ],
+  "unanswered": false,
+  "validation": {
+    "valid": true,
+    "checks": {
+      "via_worker_rag": true,
+      "has_required_shape": true,
+      "citation_enforcement_delegated_to_worker": true
+    }
+  },
+  "debug": {
+    "pipeline": "worker_rag",
+    "worker_version": "2.4.0",
+    "worker_model": "gemini-2.5-flash",
+    "worker_mode": "rag",
+    "latency_ms": 3841,
+    "retrieval_signal": "hybrid",
+    "ranking_signal": "reranker",
+    "chunks_used": [
+      {
+        "chunk_id": "booking-policies::003",
+        "section": "Verifying Information Before Booking",
+        "score": 0.9883,
+        "keyword_score": 18,
+        "vector_score": 0.878,
+        "rerank_score": 0.9994,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::004",
+        "section": "Verification and Disclaimers",
+        "score": 0.9167,
+        "keyword_score": 15,
+        "vector_score": 0.899,
+        "rerank_score": 0.998,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "travel-insurance::003",
+        "section": "Choosing and Verifying a Policy",
+        "score": 0.8856,
+        "keyword_score": 15,
+        "vector_score": 0.8431,
+        "rerank_score": 0.9966,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "travel-insurance::001",
+        "section": "What Travel Insurance Typically Covers",
+        "score": 0.8639,
+        "keyword_score": 18,
+        "vector_score": 0.6542,
+        "rerank_score": 0.9684,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::001",
+        "section": "What Is VoyageFlow?",
+        "score": 0.8242,
+        "keyword_score": 15,
+        "vector_score": 0.7327,
+        "rerank_score": 0.9268,
+        "retrieval_signal": "hybrid"
+      }
+    ],
+    "chunks_used_count": 5
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "query": "What is the capital of France?",
+  "answer_markdown": "I don't have enough evidence in the current VoyageFlow travel knowledge base to answer that.",
+  "citations": [],
+  "unanswered": true,
+  "validation": {
+    "valid": true,
+    "checks": {
+      "via_worker_rag": true,
+      "has_required_shape": true,
+      "citation_enforcement_delegated_to_worker": true
+    }
+  },
+  "debug": {
+    "pipeline": "worker_rag",
+    "worker_version": "2.4.0",
+    "worker_model": "openai/gpt-oss-120b",
+    "worker_mode": "rag",
+    "latency_ms": 1579,
+    "retrieval_signal": "hybrid",
+    "ranking_signal": "reranker",
+    "chunks_used": [
+      {
+        "chunk_id": "booking-policies::001",
+        "section": "What VoyageFlow Can Guarantee",
+        "score": 0.9858,
+        "keyword_score": 6,
+        "vector_score": 0.3392,
+        "rerank_score": 0.0006,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "travel-insurance::001",
+        "section": "What Travel Insurance Typically Covers",
+        "score": 0.9415,
+        "keyword_score": 6,
+        "vector_score": 0.3083,
+        "rerank_score": 0.0004,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "booking-policies::002",
+        "section": "What VoyageFlow Cannot Guarantee",
+        "score": 0.9188,
+        "keyword_score": 6,
+        "vector_score": 0.2924,
+        "rerank_score": 0.0003,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::003",
+        "section": "Booking Links VoyageFlow Generates",
+        "score": 0.75,
+        "keyword_score": 3,
+        "vector_score": 0.3491,
+        "rerank_score": 0.0002,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "tokyo-spring-guide::001",
+        "section": "Overview",
+        "score": 0.7305,
+        "keyword_score": 3,
+        "vector_score": 0.3355,
+        "rerank_score": 0.0001,
+        "retrieval_signal": "hybrid"
+      }
+    ],
+    "chunks_used_count": 5
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "query": "What booking links can VoyageFlow generate?",
+  "answer_markdown": "VoyageFlow generates structured booking links, which are deep-linked search URLs [voyageflow-overview::003]. These include a hotel search link pre-filled with destination, check-in date, check-out date, and guest count [voyageflow-overview::003]. It also generates a flight search link pre-filled with origin airport, destination airport, and travel dates [voyageflow-overview::003]. When relevant, an activities/experiences link (via GetYourGuide or Viator) is also generated [voyageflow-overview::003]. Users must complete their reservation on the destination platform [voyageflow-overview::003]. VoyageFlow supports partners like Booking.com, Expedia, Agoda for hotels and Google Flights, Skyscanner, and Kayak for flights [voyageflow-overview::002].",
+  "citations": [
+    {
+      "claim": "VoyageFlow generates structured booking links, which are deep-linked search URLs.",
+      "chunk_ids": [
+        "voyageflow-overview::003"
+      ]
+    },
+    {
+      "claim": "These include a hotel search link pre-filled with destination, check-in date, check-out date, and guest count.",
+      "chunk_ids": [
+        "voyageflow-overview::003"
+      ]
+    },
+    {
+      "claim": "It also generates a flight search link pre-filled with origin airport, destination airport, and travel dates.",
+      "chunk_ids": [
+        "voyageflow-overview::003"
+      ]
+    },
+    {
+      "claim": "When relevant, an activities/experiences link (via GetYourGuide or Viator) is also generated.",
+      "chunk_ids": [
+        "voyageflow-overview::003"
+      ]
+    },
+    {
+      "claim": "Users must complete their reservation on the destination platform.",
+      "chunk_ids": [
+        "voyageflow-overview::003"
+      ]
+    },
+    {
+      "claim": "VoyageFlow supports partners like Booking.com, Expedia, Agoda for hotels and Google Flights, Skyscanner, and Kayak for flights.",
+      "chunk_ids": [
+        "voyageflow-overview::002"
+      ]
+    }
+  ],
+  "unanswered": false,
+  "validation": {
+    "valid": true,
+    "checks": {
+      "via_worker_rag": true,
+      "has_required_shape": true,
+      "citation_enforcement_delegated_to_worker": true
+    }
+  },
+  "debug": {
+    "pipeline": "worker_rag",
+    "worker_version": "2.4.0",
+    "worker_model": "gemini-2.5-flash",
+    "worker_mode": "rag",
+    "latency_ms": 4766,
+    "retrieval_signal": "hybrid",
+    "ranking_signal": "reranker",
+    "chunks_used": [
+      {
+        "chunk_id": "booking-policies::001",
+        "section": "What VoyageFlow Can Guarantee",
+        "score": 0.9434,
+        "keyword_score": 16,
+        "vector_score": 0.7631,
+        "rerank_score": 0.9992,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::001",
+        "section": "What Is VoyageFlow?",
+        "score": 0.9053,
+        "keyword_score": 15,
+        "vector_score": 0.7513,
+        "rerank_score": 0.9976,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::003",
+        "section": "Booking Links VoyageFlow Generates",
+        "score": 0.8125,
+        "keyword_score": 10,
+        "vector_score": 0.8605,
+        "rerank_score": 0.9956,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "tokyo-spring-guide::004",
+        "section": "Booking Considerations",
+        "score": 0.8073,
+        "keyword_score": 13,
+        "vector_score": 0.6902,
+        "rerank_score": 0.9818,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::002",
+        "section": "How VoyageFlow Handles Hotels and Flights",
+        "score": 0.7994,
+        "keyword_score": 11,
+        "vector_score": 0.7842,
+        "rerank_score": 0.9813,
+        "retrieval_signal": "hybrid"
+      }
+    ],
+    "chunks_used_count": 5
+  }
+}

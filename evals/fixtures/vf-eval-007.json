@@ -1,0 +1,102 @@
+{
+  "query": "Can VoyageFlow guarantee hotel availability and prices?",
+  "answer_markdown": "VoyageFlow cannot guarantee hotel availability at the time of booking because inventory changes minute to minute on partner platforms [booking-policies::002]. Similarly, VoyageFlow cannot guarantee hotel prices, as rates fluctuate based on demand, promotions, and partner platform dynamics [booking-policies::002]. Users must confirm all pricing and availability directly with the booking partner before completing payment [booking-policies::002].",
+  "citations": [
+    {
+      "claim": "VoyageFlow cannot guarantee hotel availability at the time of booking.",
+      "chunk_ids": [
+        "booking-policies::002"
+      ]
+    },
+    {
+      "claim": "Hotel inventory changes minute to minute on partner platforms.",
+      "chunk_ids": [
+        "booking-policies::002"
+      ]
+    },
+    {
+      "claim": "VoyageFlow cannot guarantee hotel prices.",
+      "chunk_ids": [
+        "booking-policies::002"
+      ]
+    },
+    {
+      "claim": "Hotel rates fluctuate based on demand, promotions, and partner platform dynamics.",
+      "chunk_ids": [
+        "booking-policies::002"
+      ]
+    },
+    {
+      "claim": "Users must confirm all pricing, availability, and policies directly with the booking partner before completing payment.",
+      "chunk_ids": [
+        "booking-policies::002"
+      ]
+    }
+  ],
+  "unanswered": false,
+  "validation": {
+    "valid": true,
+    "checks": {
+      "via_worker_rag": true,
+      "has_required_shape": true,
+      "citation_enforcement_delegated_to_worker": true
+    }
+  },
+  "debug": {
+    "pipeline": "worker_rag",
+    "worker_version": "2.4.0",
+    "worker_model": "gemini-2.5-flash",
+    "worker_mode": "rag",
+    "latency_ms": 2673,
+    "retrieval_signal": "hybrid",
+    "ranking_signal": "reranker",
+    "chunks_used": [
+      {
+        "chunk_id": "booking-policies::002",
+        "section": "What VoyageFlow Cannot Guarantee",
+        "score": 1,
+        "keyword_score": 19,
+        "vector_score": 0.8472,
+        "rerank_score": 0.9996,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "tokyo-spring-guide::004",
+        "section": "Booking Considerations",
+        "score": 0.8192,
+        "keyword_score": 15,
+        "vector_score": 0.7193,
+        "rerank_score": 0.9858,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::002",
+        "section": "How VoyageFlow Handles Hotels and Flights",
+        "score": 0.793,
+        "keyword_score": 13,
+        "vector_score": 0.764,
+        "rerank_score": 0.933,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::004",
+        "section": "Verification and Disclaimers",
+        "score": 0.7652,
+        "keyword_score": 12,
+        "vector_score": 0.7614,
+        "rerank_score": 0.9132,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "booking-policies::001",
+        "section": "What VoyageFlow Can Guarantee",
+        "score": 0.7567,
+        "keyword_score": 12,
+        "vector_score": 0.7471,
+        "rerank_score": 0.8121,
+        "retrieval_signal": "hybrid"
+      }
+    ],
+    "chunks_used_count": 5
+  }
+}

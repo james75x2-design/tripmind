@@ -1,27 +1,27 @@
 {
-  "generated_at": "2026-07-23T06:44:45.279Z",
+  "generated_at": "2026-09-07T01:11:25.499Z",
   "total": 15,
-  "passed": 15,
-  "failed": 0,
-  "retrieval_passed": 15,
+  "passed": 14,
+  "failed": 1,
+  "retrieval_passed": 14,
   "answer_passed": 15,
-  "retrieval_pass_rate": 100,
+  "retrieval_pass_rate": 93,
   "answer_pass_rate": 100,
-  "overall_pass_rate": 100,
+  "overall_pass_rate": 93,
   "results": [
     {
       "id": "vf-eval-001",
       "query": "What should I know before booking hotels through VoyageFlow?",
-      "pass": true,
-      "failure_category": "pass",
+      "pass": false,
+      "failure_category": "retrieval_fail",
       "pipeline": "worker_rag",
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "openai/gpt-oss-120b",
-      "worker_latency_ms": 6409,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 6229,
       "retrieval": {
-        "pass": true,
+        "pass": false,
         "expected_chunk_ids": [
           "booking-policies::002",
           "voyageflow-overview::004"
@@ -30,23 +30,23 @@
           "booking-policies::002",
           "tokyo-spring-guide::004",
           "voyageflow-overview::001",
-          "booking-policies::001",
-          "voyageflow-overview::004"
+          "travel-insurance::001",
+          "booking-policies::001"
         ]
       },
       "answer": {
         "pass": true,
         "expected_citation_ids": [],
         "actual_citation_ids": [
+          "voyageflow-overview::001",
           "booking-policies::002",
-          "voyageflow-overview::004",
-          "booking-policies::003",
-          "tokyo-spring-guide::004"
+          "tokyo-spring-guide::004",
+          "voyageflow-overview::004"
         ],
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "Before booking hotels through VoyageFlow, keep these points in mind:\n\n- VoyageFlow **cannot guarantee** hotel availability or prices because inventory and rates change minute‑to‑minute on partner platforms [booking-policies::002].\n- You must **confirm current "
+        "answer_preview": "Before booking hotels through VoyageFlow, it's important to know that VoyageFlow provides structured booking links for hotels but does not process payments directly [voyageflow-overview::001]. VoyageFlow cannot guarantee hotel availability or prices, as invent"
       }
     },
     {
@@ -58,8 +58,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "openai/gpt-oss-120b",
-      "worker_latency_ms": 3460,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 5694,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -68,10 +68,10 @@
         ],
         "retrieved_chunk_ids": [
           "tokyo-spring-guide::003",
+          "travel-insurance::001",
           "voyageflow-overview::001",
           "tokyo-spring-guide::001",
-          "tokyo-spring-guide::004",
-          "voyageflow-overview::002"
+          "tokyo-spring-guide::004"
         ]
       },
       "answer": {
@@ -81,13 +81,12 @@
           "voyageflow-overview::001",
           "tokyo-spring-guide::003",
           "tokyo-spring-guide::004",
-          "voyageflow-overview::003",
-          "voyageflow-overview::002"
+          "voyageflow-overview::003"
         ],
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "VoyageFlow is an AI travel concierge that helps travelers plan trips, discover destinations, and generate ready‑to‑book itineraries, providing destination guidance, day‑by‑day itineraries and structured booking links while not processing payments directly [voy"
+        "answer_preview": "VoyageFlow is an AI travel concierge that helps travelers plan trips and generate ready-to-book itineraries [voyageflow-overview::001]. It provides destination guidance and day-by-day itineraries [voyageflow-overview::001]. For a Tokyo spring trip, VoyageFlow "
       }
     },
     {
@@ -99,8 +98,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 813,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 4766,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -118,12 +117,13 @@
         "pass": true,
         "expected_citation_ids": [],
         "actual_citation_ids": [
-          "voyageflow-overview::003"
+          "voyageflow-overview::003",
+          "voyageflow-overview::002"
         ],
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "VoyageFlow generates a structured **Booking Demand Card** containing a hotel search link pre-filled with destination, check-in date, check-out date, and guest count, a flight search link pre-filled with origin airport, destination airport, and travel dates, an"
+        "answer_preview": "VoyageFlow generates structured booking links, which are deep-linked search URLs [voyageflow-overview::003]. These include a hotel search link pre-filled with destination, check-in date, check-out date, and guest count [voyageflow-overview::003]. It also gener"
       }
     },
     {
@@ -135,8 +135,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 806,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 5240,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -147,19 +147,21 @@
           "voyageflow-overview::001",
           "booking-policies::003",
           "tokyo-spring-guide::004",
-          "booking-policies::001"
+          "travel-insurance::001"
         ]
       },
       "answer": {
         "pass": true,
         "expected_citation_ids": [],
         "actual_citation_ids": [
-          "voyageflow-overview::002"
+          "voyageflow-overview::002",
+          "booking-policies::003",
+          "tokyo-spring-guide::004"
         ],
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "VoyageFlow supports two primary booking flows: **Hotels** and **Flights** [voyageflow-overview::002]. For hotels, VoyageFlow surfaces hotel recommendations based on user preferences and generates deep booking links to partner platforms [voyageflow-overview::00"
+        "answer_preview": "VoyageFlow provides hotel recommendations based on user preferences and generates deep booking links to partner platforms such as Booking.com, Expedia, and Agoda [voyageflow-overview::002]. For flights, it generates search links pre-filled with origin, destina"
       }
     },
     {
@@ -171,8 +173,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "openai/gpt-oss-120b",
-      "worker_latency_ms": 2160,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 3841,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -181,10 +183,10 @@
         ],
         "retrieved_chunk_ids": [
           "booking-policies::003",
+          "travel-insurance::001",
           "voyageflow-overview::001",
           "voyageflow-overview::004",
-          "booking-policies::002",
-          "booking-policies::004"
+          "travel-insurance::002"
         ]
       },
       "answer": {
@@ -197,7 +199,7 @@
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "VoyageFlow advises travelers to verify several details before finalizing any booking, including the current price on the partner platform, the cancellation policy and refund window, the room type, bed configuration and included amenities, the total cost with t"
+        "answer_preview": "VoyageFlow strongly encourages users to verify several details before finalizing any booking [booking-policies::003]. This includes the current price on the partner platform, as VoyageFlow does not display live prices [booking-policies::003]. Users should also"
       }
     },
     {
@@ -209,8 +211,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 790,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 2496,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [],
@@ -241,8 +243,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 1101,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 2673,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -265,7 +267,7 @@
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "VoyageFlow **cannot** guarantee hotel availability [booking-policies::002] or hotel prices [booking-policies::002] as inventory changes minute to minute on partner platforms and rates fluctuate based on demand, promotions, and partner platform dynamics."
+        "answer_preview": "VoyageFlow cannot guarantee hotel availability at the time of booking because inventory changes minute to minute on partner platforms [booking-policies::002]. Similarly, VoyageFlow cannot guarantee hotel prices, as rates fluctuate based on demand, promotions, "
       }
     },
     {
@@ -277,17 +279,17 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 620,
+      "worker_model": "openai/gpt-oss-120b",
+      "worker_latency_ms": 1579,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [],
         "retrieved_chunk_ids": [
           "booking-policies::001",
           "booking-policies::002",
-          "booking-policies::003",
-          "tokyo-spring-guide::001",
-          "tokyo-spring-guide::002"
+          "travel-insurance::001",
+          "travel-insurance::002",
+          "booking-policies::003"
         ]
       },
       "answer": {
@@ -309,8 +311,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 724,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 2116,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [],
@@ -341,8 +343,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 927,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 2366,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -350,10 +352,10 @@
         ],
         "retrieved_chunk_ids": [
           "booking-policies::004",
-          "booking-policies::003",
-          "tokyo-spring-guide::001",
-          "tokyo-spring-guide::002",
-          "tokyo-spring-guide::003"
+          "travel-insurance::003",
+          "travel-insurance::002",
+          "travel-insurance::001",
+          "booking-policies::003"
         ]
       },
       "answer": {
@@ -367,7 +369,7 @@
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "VoyageFlow does not provide medical advice for travel — users should consult a licensed physician or travel medicine clinic [booking-policies::004]."
+        "answer_preview": "VoyageFlow does not provide medical advice for travel [booking-policies::004]. Users should consult a licensed physician or travel medicine clinic for such advice [booking-policies::004]."
       }
     },
     {
@@ -379,8 +381,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "openai/gpt-oss-120b",
-      "worker_latency_ms": 1895,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 4167,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -391,7 +393,7 @@
           "tokyo-spring-guide::001",
           "tokyo-spring-guide::004",
           "voyageflow-overview::004",
-          "voyageflow-overview::001"
+          "travel-insurance::003"
         ],
         "optional_override": true
       },
@@ -399,15 +401,14 @@
         "pass": true,
         "expected_citation_ids": [],
         "actual_citation_ids": [
-          "tokyo-spring-guide::004",
           "booking-policies::001",
-          "voyageflow-overview::004",
-          "booking-policies::003"
+          "tokyo-spring-guide::004",
+          "voyageflow-overview::004"
         ],
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "Yes, VoyageFlow can generate booking links for places to stay [tokyo-spring-guide::004][booking-policies::001]. However, you should verify current pricing, availability, and cancellation policies on the partner platform before finalizing your reservation [voya"
+        "answer_preview": "VoyageFlow generates booking links that point to legitimate partner platforms [booking-policies::001]. These links are pre-filled with date-specific considerations [tokyo-spring-guide::004]. However, final pricing and availability must be confirmed on partner "
       }
     },
     {
@@ -419,8 +420,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 1361,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 4389,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -429,10 +430,10 @@
         ],
         "retrieved_chunk_ids": [
           "booking-policies::002",
-          "booking-policies::001",
-          "booking-policies::003",
-          "voyageflow-overview::001",
-          "voyageflow-overview::003"
+          "travel-insurance::001",
+          "travel-insurance::003",
+          "travel-insurance::002",
+          "booking-policies::001"
         ],
         "optional_override": true
       },
@@ -441,12 +442,13 @@
         "expected_citation_ids": [],
         "actual_citation_ids": [
           "booking-policies::003",
+          "voyageflow-overview::004",
           "booking-policies::002"
         ],
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "Before finalizing your reservation, VoyageFlow strongly encourages users to verify the following: current price on the partner platform [booking-policies::003], cancellation policy and refund window [booking-policies::003], room type, bed configuration, and in"
+        "answer_preview": "Before finalizing a reservation, VoyageFlow strongly encourages users to verify several details [booking-policies::003]. This includes checking the current price on the partner platform, as VoyageFlow does not display live prices [booking-policies::003]. Users"
       }
     },
     {
@@ -458,8 +460,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 1047,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 7643,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -477,12 +479,15 @@
         "pass": true,
         "expected_citation_ids": [],
         "actual_citation_ids": [
-          "tokyo-spring-guide::001"
+          "tokyo-spring-guide::001",
+          "tokyo-spring-guide::002",
+          "tokyo-spring-guide::004",
+          "tokyo-spring-guide::003"
         ],
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "Spring in Tokyo, Japan's capital, runs from March through May and is one of the most popular times to visit [tokyo-spring-guide::001]. The season is defined by cherry blossom (sakura) viewing, mild temperatures, and a packed cultural calendar [tokyo-spring-gui"
+        "answer_preview": "Spring in Tokyo, Japan's capital, spans from March through May and is considered one of the most popular times to visit [tokyo-spring-guide::001]. The season is characterized by cherry blossom (sakura) viewing and mild temperatures, typically ranging from 10–2"
       }
     },
     {
@@ -494,8 +499,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 716,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 4687,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -503,22 +508,25 @@
         ],
         "retrieved_chunk_ids": [
           "voyageflow-overview::001",
+          "travel-insurance::001",
+          "travel-insurance::002",
           "booking-policies::002",
-          "booking-policies::003",
-          "booking-policies::004",
-          "voyageflow-overview::002"
+          "booking-policies::003"
         ]
       },
       "answer": {
         "pass": true,
         "expected_citation_ids": [],
         "actual_citation_ids": [
-          "booking-policies::002"
+          "voyageflow-overview::001",
+          "travel-insurance::002",
+          "booking-policies::002",
+          "voyageflow-overview::002"
         ],
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "VoyageFlow **cannot** guarantee [booking-policies::002] hotel availability at the time of booking, hotel prices, flight availability or fares, cancellation or refund outcomes, or visa approvals, entry permissions, or health clearances [booking-policies::002]."
+        "answer_preview": "VoyageFlow does not process payments directly [voyageflow-overview::001]. It also does not sell, underwrite, or act as a broker for any travel insurance product, nor does it recommend a specific insurer, plan, or coverage amount [travel-insurance::002]. Voyage"
       }
     },
     {
@@ -530,8 +538,8 @@
       "retrieval_signal": "hybrid",
       "ranking_signal": "reranker",
       "worker_version": "2.4.0",
-      "worker_model": "llama-3.3-70b-versatile",
-      "worker_latency_ms": 2271,
+      "worker_model": "gemini-2.5-flash",
+      "worker_latency_ms": 3455,
       "retrieval": {
         "pass": true,
         "expected_chunk_ids": [
@@ -549,19 +557,19 @@
         "pass": true,
         "expected_citation_ids": [],
         "actual_citation_ids": [
-          "tokyo-spring-guide::002",
-          "tokyo-spring-guide::004",
-          "tokyo-spring-guide::001"
+          "tokyo-spring-guide::001",
+          "tokyo-spring-guide::004"
         ],
         "unanswered_expected": false,
         "unanswered_actual": false,
         "validation_valid": true,
-        "answer_preview": "For cherry blossom trips, it is recommended to plan ahead, as peak sakura season typically falls between late March and early April [tokyo-spring-guide::002]. According to VoyageFlow, spring is peak season, and booking constraints should be considered, such as"
+        "answer_preview": "For cherry blossom trips, VoyageFlow recommends booking accommodations 3–6 months in advance for late March and early April travel [tokyo-spring-guide::001]. Flights from North America and Europe often sell out 2–3 months ahead for late-March travel [tokyo-spr"
       }
     }
   ],
   "failure_categories": {
-    "pass": 15
+    "retrieval_fail": 1,
+    "pass": 14
   },
   "pipelines_used": {
     "worker_rag": 15

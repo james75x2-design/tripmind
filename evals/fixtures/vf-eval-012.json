@@ -1,0 +1,114 @@
+{
+  "query": "What's the process before I finalize my reservation?",
+  "answer_markdown": "Before finalizing a reservation, VoyageFlow strongly encourages users to verify several details [booking-policies::003]. This includes checking the current price on the partner platform, as VoyageFlow does not display live prices [booking-policies::003]. Users should also confirm the cancellation policy and refund window [booking-policies::003], as well as the room type, bed configuration, and included amenities [booking-policies::003]. It is important to verify the total cost, including taxes, fees, and resort charges [booking-policies::003]. Additionally, users should check passport validity and visa requirements for the destination [booking-policies::003]. VoyageFlow always recommends verifying local health advisories and travel warnings [voyageflow-overview::004]. Users must confirm all pricing, availability, and policies directly with the booking partner before completing payment [booking-policies::002].",
+  "citations": [
+    {
+      "claim": "Before finalizing a reservation, VoyageFlow strongly encourages users to verify several details.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "This includes checking the current price on the partner platform, as VoyageFlow does not display live prices.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "Users should also confirm the cancellation policy and refund window, as well as the room type, bed configuration, and included amenities.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "It is important to verify the total cost, including taxes, fees, and resort charges.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "Additionally, users should check passport validity and visa requirements for the destination.",
+      "chunk_ids": [
+        "booking-policies::003"
+      ]
+    },
+    {
+      "claim": "VoyageFlow always recommends verifying local health advisories and travel warnings.",
+      "chunk_ids": [
+        "voyageflow-overview::004"
+      ]
+    },
+    {
+      "claim": "Users must confirm all pricing, availability, and policies directly with the booking partner before completing payment.",
+      "chunk_ids": [
+        "booking-policies::002"
+      ]
+    }
+  ],
+  "unanswered": false,
+  "validation": {
+    "valid": true,
+    "checks": {
+      "via_worker_rag": true,
+      "has_required_shape": true,
+      "citation_enforcement_delegated_to_worker": true
+    }
+  },
+  "debug": {
+    "pipeline": "worker_rag",
+    "worker_version": "2.4.0",
+    "worker_model": "gemini-2.5-flash",
+    "worker_mode": "rag",
+    "latency_ms": 4389,
+    "retrieval_signal": "hybrid",
+    "ranking_signal": "reranker",
+    "chunks_used": [
+      {
+        "chunk_id": "travel-insurance::003",
+        "section": "Choosing and Verifying a Policy",
+        "score": 0.9657,
+        "keyword_score": 9,
+        "vector_score": 0.6082,
+        "rerank_score": 0.0458,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "booking-policies::002",
+        "section": "What VoyageFlow Cannot Guarantee",
+        "score": 0.9112,
+        "keyword_score": 9,
+        "vector_score": 0.5371,
+        "rerank_score": 0.0038,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "travel-insurance::001",
+        "section": "What Travel Insurance Typically Covers",
+        "score": 0.8798,
+        "keyword_score": 9,
+        "vector_score": 0.496,
+        "rerank_score": 0.0026,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "booking-policies::003",
+        "section": "Verifying Information Before Booking",
+        "score": 0.8333,
+        "keyword_score": 6,
+        "vector_score": 0.653,
+        "rerank_score": 0.0025,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::004",
+        "section": "Verification and Disclaimers",
+        "score": 0.7894,
+        "keyword_score": 6,
+        "vector_score": 0.5956,
+        "rerank_score": 0.0011,
+        "retrieval_signal": "hybrid"
+      }
+    ],
+    "chunks_used_count": 5
+  }
+}

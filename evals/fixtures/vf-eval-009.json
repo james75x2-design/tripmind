@@ -1,0 +1,71 @@
+{
+  "query": "Who won the 2026 World Cup?",
+  "answer_markdown": "I don't have enough evidence in the current VoyageFlow travel knowledge base to answer that.",
+  "citations": [],
+  "unanswered": true,
+  "validation": {
+    "valid": true,
+    "checks": {
+      "via_worker_rag": true,
+      "has_required_shape": true,
+      "citation_enforcement_delegated_to_worker": true
+    }
+  },
+  "debug": {
+    "pipeline": "worker_rag",
+    "worker_version": "2.4.0",
+    "worker_model": "gemini-2.5-flash",
+    "worker_mode": "rag",
+    "latency_ms": 2116,
+    "retrieval_signal": "hybrid",
+    "ranking_signal": "reranker",
+    "chunks_used": [
+      {
+        "chunk_id": "booking-policies::001",
+        "section": "What VoyageFlow Can Guarantee",
+        "score": 1,
+        "keyword_score": 3,
+        "vector_score": 0.3931,
+        "rerank_score": 0,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::003",
+        "section": "Booking Links VoyageFlow Generates",
+        "score": 0.9822,
+        "keyword_score": 3,
+        "vector_score": 0.3791,
+        "rerank_score": 0,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "tokyo-spring-guide::002",
+        "section": "Cherry Blossom Season",
+        "score": 0.9769,
+        "keyword_score": 3,
+        "vector_score": 0.3749,
+        "rerank_score": 0,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "booking-policies::002",
+        "section": "What VoyageFlow Cannot Guarantee",
+        "score": 0.9727,
+        "keyword_score": 3,
+        "vector_score": 0.3716,
+        "rerank_score": 0,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "travel-insurance::003",
+        "section": "Choosing and Verifying a Policy",
+        "score": 0.9715,
+        "keyword_score": 3,
+        "vector_score": 0.3707,
+        "rerank_score": 0,
+        "retrieval_signal": "hybrid"
+      }
+    ],
+    "chunks_used_count": 5
+  }
+}

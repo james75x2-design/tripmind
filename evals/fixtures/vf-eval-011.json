@@ -1,0 +1,96 @@
+{
+  "query": "Can I book a place to stay through your service?",
+  "answer_markdown": "VoyageFlow generates booking links that point to legitimate partner platforms [booking-policies::001]. These links are pre-filled with date-specific considerations [tokyo-spring-guide::004]. However, final pricing and availability must be confirmed on partner platforms [tokyo-spring-guide::004]. Users are responsible for confirming all details before payment on the partner platform [voyageflow-overview::004].",
+  "citations": [
+    {
+      "claim": "VoyageFlow generates booking links that point to legitimate partner platforms.",
+      "chunk_ids": [
+        "booking-policies::001"
+      ]
+    },
+    {
+      "claim": "These links are pre-filled with date-specific considerations.",
+      "chunk_ids": [
+        "tokyo-spring-guide::004"
+      ]
+    },
+    {
+      "claim": "Final pricing and availability must be confirmed on partner platforms.",
+      "chunk_ids": [
+        "tokyo-spring-guide::004"
+      ]
+    },
+    {
+      "claim": "Users are responsible for confirming all details before payment on the partner platform.",
+      "chunk_ids": [
+        "voyageflow-overview::004"
+      ]
+    }
+  ],
+  "unanswered": false,
+  "validation": {
+    "valid": true,
+    "checks": {
+      "via_worker_rag": true,
+      "has_required_shape": true,
+      "citation_enforcement_delegated_to_worker": true
+    }
+  },
+  "debug": {
+    "pipeline": "worker_rag",
+    "worker_version": "2.4.0",
+    "worker_model": "gemini-2.5-flash",
+    "worker_mode": "rag",
+    "latency_ms": 4167,
+    "retrieval_signal": "hybrid",
+    "ranking_signal": "reranker",
+    "chunks_used": [
+      {
+        "chunk_id": "tokyo-spring-guide::004",
+        "section": "Booking Considerations",
+        "score": 0.984,
+        "keyword_score": 4,
+        "vector_score": 0.5334,
+        "rerank_score": 0.0007,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "travel-insurance::003",
+        "section": "Choosing and Verifying a Policy",
+        "score": 0.984,
+        "keyword_score": 4,
+        "vector_score": 0.5334,
+        "rerank_score": 0.0004,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::004",
+        "section": "Verification and Disclaimers",
+        "score": 0.9669,
+        "keyword_score": 4,
+        "vector_score": 0.5146,
+        "rerank_score": 0.0003,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "booking-policies::001",
+        "section": "What VoyageFlow Can Guarantee",
+        "score": 0.9163,
+        "keyword_score": 4,
+        "vector_score": 0.4589,
+        "rerank_score": 0.0002,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "tokyo-spring-guide::001",
+        "section": "Overview",
+        "score": 0.8497,
+        "keyword_score": 4,
+        "vector_score": 0.3854,
+        "rerank_score": 0.0002,
+        "retrieval_signal": "hybrid"
+      }
+    ],
+    "chunks_used_count": 5
+  }
+}

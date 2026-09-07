@@ -8,6 +8,39 @@ const EVAL_DATA_PATH = "evals/eval-data.json";
 const REPORT_PATH = "evals/eval-report.json";
 const TOP_K = 5;
 
+// ── Hermetic eval mode ───────────────────────────────────────────────────────
+// retrieve() is already offline (pure scoring over pre-embedded chunks), but
+// answerWithContext() calls the Worker and burns provider tokens. Record once,
+// then replay forever: deterministic, free, and runnable when quotas are spent.
+//   EVAL_RECORD=1   run live and write evals/fixtures/<id>.json
+//   EVAL_HERMETIC=1 replay fixtures, no network
+const FIXTURES_DIR = "evals/fixtures";
+const HERMETIC = process.env.EVAL_HERMETIC === "1";
+const RECORD = process.env.EVAL_RECORD === "1";
+
+async function answerForCase(testCase) {
+  const fixturePath = `${FIXTURES_DIR}/${testCase.id}.json`;
+
+  if (HERMETIC) {
+    try {
+      return JSON.parse(await fs.readFile(fixturePath, "utf8"));
+    } catch {
+      throw new Error(
+        `Hermetic mode: missing fixture for ${testCase.id}. Record it first with EVAL_RECORD=1 node evals/eval.mjs`
+      );
+    }
+  }
+
+  const result = await answerWithContext(testCase.query);
+
+  if (RECORD) {
+    await fs.mkdir(FIXTURES_DIR, { recursive: true });
+    await fs.writeFile(fixturePath, JSON.stringify(result, null, 2));
+  }
+
+  return result;
+}
+
 function unique(values) {
   return [...new Set(values)];
 }
@@ -88,7 +121,7 @@ function evaluateAnswer(testCase, answerResult) {
 
 async function runOne(testCase) {
   const retrievedChunks = (await retrieve(testCase.query, TOP_K)).slice(0, TOP_K);
-  const answerResult = await answerWithContext(testCase.query);
+  const answerResult = await answerForCase(testCase);
   const retrieval = evaluateRetrieval(testCase, retrievedChunks);
   const answer = evaluateAnswer(testCase, answerResult);
 
@@ -160,6 +193,8 @@ function printResult(result) {
 }
 
 async function main() {
+  if (HERMETIC) console.log("Running in HERMETIC mode — replaying fixtures, no provider calls.");
+  else if (RECORD) console.log("Running LIVE with RECORD — fixtures will be written to " + FIXTURES_DIR + ".");
   console.log("VoyageFlow RAG Evaluation Harness");
   console.log("=================================");
   const testCases = await loadEvalData();

@@ -1,0 +1,96 @@
+{
+  "query": "How far ahead should I plan for cherry blossom trips?",
+  "answer_markdown": "For cherry blossom trips, VoyageFlow recommends booking accommodations 3–6 months in advance for late March and early April travel [tokyo-spring-guide::001]. Flights from North America and Europe often sell out 2–3 months ahead for late-March travel [tokyo-spring-guide::004]. Popular ryokan (traditional inns) require booking 4–6 months in advance [tokyo-spring-guide::004]. Additionally, restaurant reservations at high-demand venues should be secured before arrival [tokyo-spring-guide::004].",
+  "citations": [
+    {
+      "claim": "VoyageFlow recommends booking accommodations 3–6 months in advance for late March and early April travel.",
+      "chunk_ids": [
+        "tokyo-spring-guide::001"
+      ]
+    },
+    {
+      "claim": "Flights from North America and Europe often sell out 2–3 months ahead for late-March travel.",
+      "chunk_ids": [
+        "tokyo-spring-guide::004"
+      ]
+    },
+    {
+      "claim": "Popular ryokan (traditional inns) require booking 4–6 months in advance.",
+      "chunk_ids": [
+        "tokyo-spring-guide::004"
+      ]
+    },
+    {
+      "claim": "Restaurant reservations at high-demand venues should be secured before arrival.",
+      "chunk_ids": [
+        "tokyo-spring-guide::004"
+      ]
+    }
+  ],
+  "unanswered": false,
+  "validation": {
+    "valid": true,
+    "checks": {
+      "via_worker_rag": true,
+      "has_required_shape": true,
+      "citation_enforcement_delegated_to_worker": true
+    }
+  },
+  "debug": {
+    "pipeline": "worker_rag",
+    "worker_version": "2.4.0",
+    "worker_model": "gemini-2.5-flash",
+    "worker_mode": "rag",
+    "latency_ms": 3455,
+    "retrieval_signal": "hybrid",
+    "ranking_signal": "reranker",
+    "chunks_used": [
+      {
+        "chunk_id": "tokyo-spring-guide::002",
+        "section": "Cherry Blossom Season",
+        "score": 1,
+        "keyword_score": 9,
+        "vector_score": 0.6918,
+        "rerank_score": 0.9528,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "tokyo-spring-guide::004",
+        "section": "Booking Considerations",
+        "score": 0.9968,
+        "keyword_score": 9,
+        "vector_score": 0.6873,
+        "rerank_score": 0.0153,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "tokyo-spring-guide::001",
+        "section": "Overview",
+        "score": 0.9847,
+        "keyword_score": 9,
+        "vector_score": 0.6706,
+        "rerank_score": 0.0075,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::001",
+        "section": "What Is VoyageFlow?",
+        "score": 0.802,
+        "keyword_score": 9,
+        "vector_score": 0.4178,
+        "rerank_score": 0,
+        "retrieval_signal": "hybrid"
+      },
+      {
+        "chunk_id": "voyageflow-overview::003",
+        "section": "Booking Links VoyageFlow Generates",
+        "score": 0.725,
+        "keyword_score": 6,
+        "vector_score": 0.5419,
+        "rerank_score": 0,
+        "retrieval_signal": "hybrid"
+      }
+    ],
+    "chunks_used_count": 5
+  }
+}
